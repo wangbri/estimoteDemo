@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         rootView = findViewById(android.R.id.content);
         rootView.setBackgroundColor(Color.WHITE);
         textView = (TextView) findViewById(R.id.textView);
-        textView.setTextSize(20.0f);
+        textView.setTextSize(50.0f);
         textView.setTextColor(Color.WHITE);
 
         beaconManager = new BeaconManager(this);
@@ -92,17 +92,17 @@ public class MainActivity extends AppCompatActivity {
                     currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
                     if (places.get(0).equals("Patient room A")) {
                         rootView.setBackgroundColor(Color.rgb(114, 31, 33));
-                        textView.setText(currentDateTimeString + ": Patient room A");
+                        textView.setText(currentDateTimeString);
                     }
 
                     if (places.get(0).equals("Bathroom")) {
-                        rootView.setBackgroundColor(Color.rgb(255, 174, 201));
-                        textView.setText(currentDateTimeString + ": Bathroom");
+                        rootView.setBackgroundColor(Color.rgb(255, 132, 172));
+                        textView.setText(currentDateTimeString);
                     }
 
                     if (places.get(0).equals("Patient room B")) {
-                        rootView.setBackgroundColor(Color.rgb(255, 255, 108));
-                        textView.setText(currentDateTimeString + ": Patient room B");
+                        rootView.setBackgroundColor(Color.rgb(221, 221, 0));
+                        textView.setText(currentDateTimeString);
                     }
                 } else {
                     rootView.setBackgroundColor(Color.WHITE);
