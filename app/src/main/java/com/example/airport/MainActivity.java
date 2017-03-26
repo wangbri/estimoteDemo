@@ -93,14 +93,10 @@ public class MainActivity extends AppCompatActivity {
                     if (places.get(0).equals("Patient room A")) {
                         rootView.setBackgroundColor(Color.rgb(114, 31, 33));
                         textView.setText(currentDateTimeString);
-                    }
-
-                    if (places.get(0).equals("Bathroom")) {
+                    } else if (places.get(0).equals("Bathroom")) {
                         rootView.setBackgroundColor(Color.rgb(255, 132, 172));
                         textView.setText(currentDateTimeString);
-                    }
-
-                    if (places.get(0).equals("Patient room B")) {
+                    } else if (places.get(0).equals("Patient room B")) {
                         rootView.setBackgroundColor(Color.rgb(221, 221, 0));
                         textView.setText(currentDateTimeString);
                     }
