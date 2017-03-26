@@ -7,18 +7,23 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 import com.estimote.sdk.SystemRequirementsChecker;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import static com.example.airport.MyApplication.currentDateTimeString;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     View rootView;
     static Boolean foundPatientA = false;
+    TextView textView;
 
     // TODO: replace "<major>:<minor>" strings to match your own beacons.
     static {
@@ -42,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
         placesByBeacons.put("36288:15983", new ArrayList<String>() {{
             add("Patient room B");
             add("Patient room A");
+            add("Bathroom");
+        }});
+        placesByBeacons.put("54922:9228", new ArrayList<String>() {{
+            add("Patient room A");
+            add("Patient room B");
             add("Bathroom");
         }});
         PLACES_BY_BEACONS = Collections.unmodifiableMap(placesByBeacons);
@@ -63,7 +74,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         rootView = findViewById(android.R.id.content);
-        rootView.setBackgroundColor(Color.RED);
+        rootView.setBackgroundColor(Color.WHITE);
+        textView = (TextView) findViewById(R.id.textView);
+        textView.setTextSize(20.0f);
+        textView.setTextColor(Color.WHITE);
 
         beaconManager = new BeaconManager(this);
         beaconManager.setRangingListener(new BeaconManager.RangingListener() {
@@ -72,15 +86,26 @@ public class MainActivity extends AppCompatActivity {
                 if (!list.isEmpty()) {
                     Beacon nearestBeacon = list.get(0);
                     List<String> places = placesNearBeacon(nearestBeacon);
+                    System.out.println(places.toString());
                     // TODO: update the UI here
                     Log.d("Doctor's office", "Nearest places: " + places);
-                    if (foundPatientA) {
-                        rootView.setBackgroundColor(Color.GREEN);
+                    currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                    if (places.get(0).equals("Patient room A")) {
+                        rootView.setBackgroundColor(Color.rgb(114, 31, 33));
+                        textView.setText(currentDateTimeString + ": Patient room A");
                     }
 
-                    if (!foundPatientA) {
-                        rootView.setBackgroundColor(Color.RED);
+                    if (places.get(0).equals("Bathroom")) {
+                        rootView.setBackgroundColor(Color.rgb(255, 174, 201));
+                        textView.setText(currentDateTimeString + ": Bathroom");
                     }
+
+                    if (places.get(0).equals("Patient room B")) {
+                        rootView.setBackgroundColor(Color.rgb(255, 255, 108));
+                        textView.setText(currentDateTimeString + ": Patient room B");
+                    }
+                } else {
+                    rootView.setBackgroundColor(Color.WHITE);
                 }
             }
         });

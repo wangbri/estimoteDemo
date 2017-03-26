@@ -14,7 +14,6 @@ import com.estimote.sdk.Region;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 public class MyApplication extends Application {
 
@@ -49,8 +48,8 @@ public class MyApplication extends Application {
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
-                beaconManager.startMonitoring(new Region("monitored region",
-                        UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 54922, 9228));
+                //beaconManager.startMonitoring(new Region("monitored region",
+                        //UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"), 54922, 9228));
             }
         });
     }
